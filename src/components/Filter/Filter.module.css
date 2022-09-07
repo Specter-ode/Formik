@@ -1,0 +1,21 @@
+.filter__label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.filter__input {
+  background-color: transparent;
+  border: 2px solid rgb(17, 1, 70);
+  margin-right: 20px;
+  height: 24px;
+  width: 200px;
+  font-size: 16px;
+  font-weight: 700;
+  outline: none;
+}
+
+.filter__input:focus {
+  border-color: rgb(88, 88, 159);
+}

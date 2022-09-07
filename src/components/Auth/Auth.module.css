@@ -1,0 +1,26 @@
+.link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-weight: 500;
+  color: #2a363b;
+  font-size: 20px;
+  box-shadow: 0 2px 6px rgba(17, 1, 70, 0.5), 3px 6px 9px rgba(17, 1, 70, 0.3);
+  border: 4px solid rgb(17, 1, 70);
+  border-radius: 10px;
+}
+.link:hover {
+  background-color: rgb(17, 1, 70);
+  color: #ffffff;
+  border: 4px solid rgb(180, 159, 248);
+}
+.link:not(:last-child) {
+  margin-right: 20px;
+}
+
+.activeLink {
+  composes: link;
+  background-color: rgb(17, 1, 70);
+  color: #ffffff;
+  border: 4px solid rgb(180, 159, 248);
+}

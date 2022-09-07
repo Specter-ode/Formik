@@ -1,0 +1,28 @@
+.block {
+  display: flex;
+  align-items: center;
+}
+.block:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.input {
+  outline: none;
+  background-color: transparent;
+  color: rgb(17, 1, 70);
+  border: 2px solid rgb(17, 1, 70);
+  height: 24px;
+  margin-right: 20px;
+  font-size: 16px;
+  font-weight: 700;
+}
+input:focus {
+  border-color: rgb(88, 88, 159);
+}
