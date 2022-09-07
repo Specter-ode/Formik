@@ -1,13 +1,37 @@
 {
   "files": {
-    "main.css": "/react-homework-template/static/css/main.7acaea2f.css",
-    "main.js": "/react-homework-template/static/js/main.07d3183d.js",
-    "index.html": "/react-homework-template/index.html",
-    "main.7acaea2f.css.map": "/react-homework-template/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/react-homework-template/static/js/main.07d3183d.js.map"
+    "main.css": "/Formik/static/css/main.6aae3a50.css",
+    "main.js": "/Formik/static/js/main.d1e85007.js",
+    "static/css/541.118a9893.chunk.css": "/Formik/static/css/541.118a9893.chunk.css",
+    "static/js/541.5b30e519.chunk.js": "/Formik/static/js/541.5b30e519.chunk.js",
+    "static/css/548.f8ec86c6.chunk.css": "/Formik/static/css/548.f8ec86c6.chunk.css",
+    "static/js/548.6d249d5e.chunk.js": "/Formik/static/js/548.6d249d5e.chunk.js",
+    "static/css/481.6411741e.chunk.css": "/Formik/static/css/481.6411741e.chunk.css",
+    "static/js/481.dc683094.chunk.js": "/Formik/static/js/481.dc683094.chunk.js",
+    "static/css/139.52852b15.chunk.css": "/Formik/static/css/139.52852b15.chunk.css",
+    "static/js/139.b9636511.chunk.js": "/Formik/static/js/139.b9636511.chunk.js",
+    "static/css/849.929ec040.chunk.css": "/Formik/static/css/849.929ec040.chunk.css",
+    "static/js/849.eb842d8a.chunk.js": "/Formik/static/js/849.eb842d8a.chunk.js",
+    "static/js/83.5ffaabc3.chunk.js": "/Formik/static/js/83.5ffaabc3.chunk.js",
+    "static/media/error404.jpg": "/Formik/static/media/error404.8bd5fb038884dbcdd79b.jpg",
+    "static/media/phonebook.png": "/Formik/static/media/phonebook.0f08de462ae3cfb139e8.png",
+    "index.html": "/Formik/index.html",
+    "main.6aae3a50.css.map": "/Formik/static/css/main.6aae3a50.css.map",
+    "main.d1e85007.js.map": "/Formik/static/js/main.d1e85007.js.map",
+    "541.118a9893.chunk.css.map": "/Formik/static/css/541.118a9893.chunk.css.map",
+    "541.5b30e519.chunk.js.map": "/Formik/static/js/541.5b30e519.chunk.js.map",
+    "548.f8ec86c6.chunk.css.map": "/Formik/static/css/548.f8ec86c6.chunk.css.map",
+    "548.6d249d5e.chunk.js.map": "/Formik/static/js/548.6d249d5e.chunk.js.map",
+    "481.6411741e.chunk.css.map": "/Formik/static/css/481.6411741e.chunk.css.map",
+    "481.dc683094.chunk.js.map": "/Formik/static/js/481.dc683094.chunk.js.map",
+    "139.52852b15.chunk.css.map": "/Formik/static/css/139.52852b15.chunk.css.map",
+    "139.b9636511.chunk.js.map": "/Formik/static/js/139.b9636511.chunk.js.map",
+    "849.929ec040.chunk.css.map": "/Formik/static/css/849.929ec040.chunk.css.map",
+    "849.eb842d8a.chunk.js.map": "/Formik/static/js/849.eb842d8a.chunk.js.map",
+    "83.5ffaabc3.chunk.js.map": "/Formik/static/js/83.5ffaabc3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.6aae3a50.css",
+    "static/js/main.d1e85007.js"
   ]
 }
