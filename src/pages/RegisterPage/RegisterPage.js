@@ -1,15 +1,16 @@
 import s from './RegisterPage.module.css';
-import { useDispatch } from 'react-redux';
-
+// import { useDispatch } from 'react-redux';
+import { authStore } from 'mobx/store';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
-import { register } from '../../redux/auth/auth-operations';
+import { observer } from 'mobx-react-lite';
+// import { register } from '../../redux/auth/auth-operations';
 
-const RegisterPage = () => {
-  const dispatch = useDispatch();
+const RegisterPage = observer(() => {
+  // const dispatch = useDispatch();
 
-  const onRegister = data => {
-    dispatch(register(data));
-  };
+  // const onRegister = data => {
+  //   dispatch(register(data));
+  // };
   return (
     <main>
       <div className={s.container}>
@@ -17,10 +18,10 @@ const RegisterPage = () => {
           You are on the right way. To access to the phonebook you need to
           register
         </h3>
-        <RegisterForm onSubmitClick={onRegister} />
+        <RegisterForm onSubmitClick={authStore.register} />
       </div>
     </main>
   );
-};
+});
 
 export default RegisterPage;

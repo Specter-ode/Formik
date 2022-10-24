@@ -1,4 +1,4 @@
-// const { makeAutoObservable, observable, action } = require('mobx');
+const { makeAutoObservable /* observable, action */ } = require('mobx');
 
 class Todo {
   todos = [

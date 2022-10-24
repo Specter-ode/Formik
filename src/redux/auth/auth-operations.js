@@ -2,18 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as api from '../../services/api/auth';
 import { toast } from 'react-toastify';
 
-export const register = createAsyncThunk(
-  'auth/register',
-  async (data, thunkAPI) => {
-    try {
-      const result = await api.register(data);
-      return result;
-    } catch (error) {
-      toast.error(`Sorry, Register failed. Try again.`);
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
+export const register = createAsyncThunk('auth/register');
 
 export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
   try {

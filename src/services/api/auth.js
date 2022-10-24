@@ -12,7 +12,9 @@ const setToken = (token = '') => {
 };
 
 export const register = async data => {
+  console.log('api data: ', data);
   const result = await instance.post('/users/signup', data);
+  console.log('api result: ', result);
   setToken(result.data.token);
   return result.data;
 };
