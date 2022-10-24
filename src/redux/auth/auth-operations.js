@@ -32,7 +32,7 @@ export const logout = createAsyncThunk(
       const result = await api.logout(data);
       return result;
     } catch (error) {
-      toast.error(`Sorry, register failed. Try again.`);
+      toast.error(`Sorry, logout failed. Try again.`);
       return thunkAPI.rejectWithValue(error);
     }
   }
