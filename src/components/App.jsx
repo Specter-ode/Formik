@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { getCurrentUser } from '../redux/auth/auth-operations';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const MobxPage = lazy(() => import('../pages/MobxPage/MobxPage'));
 const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
@@ -32,7 +33,7 @@ const App = () => {
       <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-
+          <Route path="/mobx" element={<MobxPage />} />
           <Route element={<PrivateRoute />}>
             <Route path="/contacts" element={<ContactsPage />} />
           </Route>
