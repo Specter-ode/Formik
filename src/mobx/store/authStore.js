@@ -38,12 +38,12 @@ class AuthStore {
       this.setUser(result.user);
       this.setToken(result.token);
       this.setIsLogin(true);
-      return result;
     } catch (error) {
       toast.error(`Sorry, Register failed. Try again.`);
       this.setError(error);
+    } finally {
+      this.setLoading(false);
     }
-    this.setLoading(false);
   };
 
   login = async data => {
@@ -54,27 +54,27 @@ class AuthStore {
       this.setUser(result.user);
       this.setToken(result.token);
       this.setIsLogin(true);
-      return result;
     } catch (error) {
       toast.error(`Sorry, login failed. Check email and password. Try again.`);
       this.setError(error);
+    } finally {
+      this.setLoading(false);
     }
-    this.setLoading(false);
   };
   logout = async data => {
     try {
       this.setError(null);
       this.setLoading(true);
-      const result = await api.logout(data);
+      await api.logout(data);
       this.setUser({});
       this.setToken('');
       this.setIsLogin(false);
-      return result;
     } catch (error) {
       toast.error(`Sorry, logout failed. Try again.`);
       this.setError(error);
+    } finally {
+      this.setLoading(false);
     }
-    this.setLoading(false);
   };
   getCurrentUser = async () => {
     try {
@@ -85,14 +85,14 @@ class AuthStore {
       this.setToken(result.token);
       this.setIsLogin(true);
       toast.info('Hello, you are already signed in');
-      return result;
     } catch (error) {
       toast.error(
         'Sorry, request failed. May be you have problems with network or token timed out '
       );
       this.setError(error);
+    } finally {
+      this.setLoading(false);
     }
-    this.setLoading(false);
   };
 }
 

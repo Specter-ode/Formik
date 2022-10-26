@@ -1,69 +1,81 @@
 import s from './ContactsPage.module.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import {
-  fetchContacts,
-  removeContact,
-  addContact,
-} from '../../redux/contacts/contacts-operations';
-import { filterChange } from '../../redux/contacts/contacts-slice';
-import {
-  getContacts,
-  getFilterValue,
-} from '../../redux/contacts/contacts-selectors';
-
+import { useEffect, useRef } from 'react';
 import Section from '../../components/Section/Section';
 import ContactForm from '../../components/ContactForm/ContactForm';
 import ContactList from '../../components/ContactList/ContactList';
 import Filter from '../../components/Filter/Filter';
 import Spinner from '../../components/Spinner/Spinner';
+import { contactsStore } from 'mobx/store';
+import { observer } from 'mobx-react-lite';
 
-const ContactsPage = () => {
-  const contacts = useSelector(getContacts);
+const ContactsPage = observer(() => {
+  const {
+    fetchContacts,
+    addContact,
+    removeContact,
+    onChangeFilter,
+    items,
+    loading,
+    error,
+    filter,
+    visibleContacts,
+  } = contactsStore;
+  console.log('error: ', error);
+  console.log('items: ', items);
+  console.log('visibleContacts: ', visibleContacts);
 
-  const filterValue = useSelector(getFilterValue);
-  const dispatch = useDispatch();
+  const firstRender = useRef(true);
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('my-contacts'));
+    if (items && items.length) {
+      setContacts(items);
+    }
+  }, []);
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    if (!firstRender.current) {
+      localStorage.setItem('my-contacts', JSON.stringify(contacts));
+      return;
+    }
+    firstRender.current = false;
+  }, [contacts]);
 
-  const onAddContact = newContactData => {
-    dispatch(addContact(newContactData));
-  };
+  // useEffect(() => {
+  //   fetchContacts();
+  //   console.log('запрос фетч контактс');
+  // }, []);
 
-  const onRemoveContact = contactId => {
-    dispatch(removeContact(contactId));
-  };
+  // const onChangeFilter = e => {
+  //   dispatch(filterChange(e.target.value));
+  // };
+  // const { items, loading, error, filter } = contacts;
 
-  const onChangeFilter = e => {
-    dispatch(filterChange(e.target.value));
-  };
-  const { items, loading, error, filter } = contacts;
-
-  const getVisibleContacts = () => {
-    const normalizedFilterValue = filter.toLowerCase().trim();
-    return items.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilterValue)
-    );
-  };
+  // const getVisibleContacts = () => {
+  //   const normalizedFilterValue = items.toLowerCase().trim();
+  //   console.log('normalizedFilterValue: ', normalizedFilterValue);
+  //   const visibleContacts = items.filter(contact =>
+  //     contact.name.toLowerCase().includes(normalizedFilterValue)
+  //   );
+  //   console.log('visibleContacts: ', visibleContacts);
+  //   return visibleContacts;
+  // };
   return (
     <main>
       <div className={s.container}>
         <Section title="Phonebook">
-          <ContactForm onSubmitClick={onAddContact} />
+          <ContactForm onSubmitClick={addContact} />
         </Section>
         <Section title="Contacts">
           {loading && <Spinner />}
           {items.length > 0 ? (
             <>
               <Filter
-                valueFromFilter={filterValue}
+                valueFromFilter={filter}
                 catchFilterInfo={onChangeFilter}
               />
               <ContactList
-                contacts={getVisibleContacts()}
-                removeContact={onRemoveContact}
+                contacts={visibleContacts}
+                removeContact={removeContact}
               />
             </>
           ) : (
@@ -74,6 +86,6 @@ const ContactsPage = () => {
       </div>
     </main>
   );
-};
+});
 
 export default ContactsPage;
