@@ -30,7 +30,6 @@ class AuthStore {
     this.loading = bool;
   };
   register = async data => {
-    console.log('data: ', data);
     try {
       this.setError(null);
       this.setLoading(true);
@@ -51,6 +50,8 @@ class AuthStore {
       this.setError(null);
       this.setLoading(true);
       const result = await api.login(data);
+      // localStorage.setItem('user', JSON.stringify(result.user));
+      localStorage.setItem('token', JSON.stringify(result.token));
       this.setUser(result.user);
       this.setToken(result.token);
       this.setIsLogin(true);
@@ -78,11 +79,13 @@ class AuthStore {
   };
   getCurrentUser = async () => {
     try {
+      const token = JSON.parse(localStorage.getItem('token'));
+      console.log('token getCurrentUser: ', token);
       this.setError(null);
       this.setLoading(true);
-      const result = await api.getCurrentUser(this.token);
-      this.setUser(result.user);
-      this.setToken(result.token);
+      const result = await api.getCurrentUser(token);
+      this.setUser(result);
+      this.setToken(token);
       this.setIsLogin(true);
       toast.info('Hello, you are already signed in');
     } catch (error) {

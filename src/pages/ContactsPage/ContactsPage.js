@@ -1,5 +1,5 @@
 import s from './ContactsPage.module.css';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Section from '../../components/Section/Section';
 import ContactForm from '../../components/ContactForm/ContactForm';
 import ContactList from '../../components/ContactList/ContactList';
@@ -20,45 +20,13 @@ const ContactsPage = observer(() => {
     filter,
     visibleContacts,
   } = contactsStore;
-  console.log('error: ', error);
-  console.log('items: ', items);
-  console.log('visibleContacts: ', visibleContacts);
 
-  const firstRender = useRef(true);
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('my-contacts'));
-    if (items && items.length) {
-      setContacts(items);
-    }
+    fetchContacts();
+    console.log('запрос фетч контактс');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (!firstRender.current) {
-      localStorage.setItem('my-contacts', JSON.stringify(contacts));
-      return;
-    }
-    firstRender.current = false;
-  }, [contacts]);
-
-  // useEffect(() => {
-  //   fetchContacts();
-  //   console.log('запрос фетч контактс');
-  // }, []);
-
-  // const onChangeFilter = e => {
-  //   dispatch(filterChange(e.target.value));
-  // };
-  // const { items, loading, error, filter } = contacts;
-
-  // const getVisibleContacts = () => {
-  //   const normalizedFilterValue = items.toLowerCase().trim();
-  //   console.log('normalizedFilterValue: ', normalizedFilterValue);
-  //   const visibleContacts = items.filter(contact =>
-  //     contact.name.toLowerCase().includes(normalizedFilterValue)
-  //   );
-  //   console.log('visibleContacts: ', visibleContacts);
-  //   return visibleContacts;
-  // };
   return (
     <main>
       <div className={s.container}>

@@ -1,9 +1,10 @@
 import s from './RegisterPage.module.css';
-import { authStore } from 'mobx/store';
+import { authStore, contactsStore } from 'mobx/store';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { observer } from 'mobx-react-lite';
 
 const RegisterPage = observer(() => {
+  console.log(contactsStore.loading);
   return (
     <main>
       <div className={s.container}>

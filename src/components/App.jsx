@@ -7,9 +7,8 @@ import Header from './Header/Header';
 import Spinner from './Spinner/Spinner';
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getCurrentUser } from '../redux/auth/auth-operations';
+import { authStore } from 'mobx/store';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const MobxPage = lazy(() => import('../pages/MobxPage/MobxPage'));
@@ -19,10 +18,8 @@ const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 
 const App = () => {
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getCurrentUser());
+    authStore.getCurrentUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

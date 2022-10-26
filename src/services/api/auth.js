@@ -6,7 +6,6 @@ const instance = axios.create({
 
 const setToken = (token = '') => {
   if (token) {
-    console.log('token: ', token);
     return (instance.defaults.headers.authorization = `Bearer ${token}`);
   }
   instance.defaults.headers.authorization = '';
