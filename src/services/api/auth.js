@@ -6,6 +6,7 @@ const instance = axios.create({
 
 const setToken = (token = '') => {
   if (token) {
+    console.log('token: ', token);
     return (instance.defaults.headers.authorization = `Bearer ${token}`);
   }
   instance.defaults.headers.authorization = '';
@@ -22,7 +23,6 @@ export const register = async data => {
 export const login = async data => {
   const result = await instance.post('/users/login', data);
   setToken(result.data.token);
-
   return result.data;
 };
 

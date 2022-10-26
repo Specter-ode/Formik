@@ -32,29 +32,68 @@ class AuthStore {
   register = async data => {
     console.log('data: ', data);
     try {
+      this.setError(null);
       this.setLoading(true);
-      const result = await api.register(data);
-      console.log('result: ', result);
-      console.log('result.user: ', result.user);
+      const result = await api.login(data);
       this.setUser(result.user);
-
       this.setToken(result.token);
-      console.log('this.token : ', this.token);
-      console.log('this.user: ', this.user);
       this.setIsLogin(true);
-      this.setLoading(false);
+      return result;
     } catch (error) {
-      console.log('error: ', error);
       toast.error(`Sorry, Register failed. Try again.`);
       this.setError(error);
-      this.setLoading(false);
     }
-    console.log('finish reg');
+    this.setLoading(false);
   };
 
-  async login() {}
-  async logout() {}
-  async getCurrentUser() {}
+  login = async data => {
+    try {
+      this.setError(null);
+      this.setLoading(true);
+      const result = await api.login(data);
+      this.setUser(result.user);
+      this.setToken(result.token);
+      this.setIsLogin(true);
+      return result;
+    } catch (error) {
+      toast.error(`Sorry, login failed. Check email and password. Try again.`);
+      this.setError(error);
+    }
+    this.setLoading(false);
+  };
+  logout = async data => {
+    try {
+      this.setError(null);
+      this.setLoading(true);
+      const result = await api.logout(data);
+      this.setUser({});
+      this.setToken('');
+      this.setIsLogin(false);
+      return result;
+    } catch (error) {
+      toast.error(`Sorry, logout failed. Try again.`);
+      this.setError(error);
+    }
+    this.setLoading(false);
+  };
+  getCurrentUser = async () => {
+    try {
+      this.setError(null);
+      this.setLoading(true);
+      const result = await api.getCurrentUser(this.token);
+      this.setUser(result.user);
+      this.setToken(result.token);
+      this.setIsLogin(true);
+      toast.info('Hello, you are already signed in');
+      return result;
+    } catch (error) {
+      toast.error(
+        'Sorry, request failed. May be you have problems with network or token timed out '
+      );
+      this.setError(error);
+    }
+    this.setLoading(false);
+  };
 }
 
 export default new AuthStore();

@@ -1,14 +1,8 @@
 import s from './LoginPage.module.css';
-import { useDispatch } from 'react-redux';
+import { authStore } from 'mobx/store';
 import LoginForm from '../../components/LoginForm/LoginForm';
-import { login } from '../../redux/auth/auth-operations';
-const LoginPage = () => {
-  const dispatch = useDispatch();
-
-  const onLogin = data => {
-    dispatch(login(data));
-  };
-
+import { observer } from 'mobx-react-lite';
+const LoginPage = observer(() => {
   return (
     <main>
       <div className={s.container}>
@@ -16,10 +10,9 @@ const LoginPage = () => {
           You are on the right way. To access to the phonebook you need to sign
           in
         </h3>
-        <LoginForm onSubmitClick={onLogin} />
+        <LoginForm onSubmitClick={authStore.login} />
       </div>
     </main>
   );
-};
-
+});
 export default LoginPage;

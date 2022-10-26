@@ -1,16 +1,9 @@
 import s from './RegisterPage.module.css';
-// import { useDispatch } from 'react-redux';
 import { authStore } from 'mobx/store';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { observer } from 'mobx-react-lite';
-// import { register } from '../../redux/auth/auth-operations';
 
 const RegisterPage = observer(() => {
-  // const dispatch = useDispatch();
-
-  // const onRegister = data => {
-  //   dispatch(register(data));
-  // };
   return (
     <main>
       <div className={s.container}>

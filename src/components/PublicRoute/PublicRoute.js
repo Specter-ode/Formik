@@ -1,12 +1,14 @@
 import { Navigate, Outlet } from 'react-router-dom';
 // import { Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getToken } from 'redux/auth/auth-selector';
+// import { useSelector } from 'react-redux';
+// import { getToken } from 'redux/auth/auth-selector';
+import { authStore } from 'mobx/store';
+import { observer } from 'mobx-react-lite';
 
-const PublicRoute = () => {
-  const isToken = useSelector(getToken);
+const PublicRoute = observer(() => {
+  const isToken = authStore.token;
   return <>{isToken ? <Navigate to="/contacts" /> : <Outlet />}</>;
-};
+});
 
 // Второй вариант маршрута ----->>>
 // const PublicRoute = ({children, restricted=false, ...routeProps,}) => {

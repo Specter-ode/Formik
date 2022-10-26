@@ -1,9 +1,9 @@
 import { injectStores } from '@mobx-devtools/tools';
-// import contactsStore from './contactsStore';
+import contactsStore from './contactsStore';
 import authStore from './authStore';
 
 injectStores({
-  //   contactsStore,
+  contactsStore,
   authStore,
 });
-export { authStore };
+export { authStore, contactsStore };

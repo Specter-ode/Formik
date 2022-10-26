@@ -1,11 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getToken } from 'redux/auth/auth-selector';
+import { authStore } from 'mobx/store';
+import { observer } from 'mobx-react-lite';
 
-const PrivateRoute = () => {
-  const isToken = useSelector(getToken);
+const PrivateRoute = observer(() => {
+  const isToken = authStore.token;
   return <>{isToken ? <Outlet /> : <Navigate to="/login" />}</>;
-};
+});
 
 // import { Route, Redirect } from 'react-router-dom';
 // Второй вариант маршрута.  --->>
