@@ -1,42 +1,81 @@
 import PropTypes from 'prop-types';
 import s from './LoginForm.module.css';
-import useForm from '../../services/hooks/useForm';
-import FormTextField from 'components/FormTextField/FormTextField';
 import Section from 'components/Section/Section';
-import { fields } from './fields';
-
-const initialState = {
-  name: '',
-  email: '',
-  password: '',
-};
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const LoginForm = ({ onSubmitClick }) => {
-  const { state, handleChange, handleSubmit } = useForm({
-    onSubmitClick,
-    initialState,
-  });
-
-  const { email, password } = state;
-  const isActive = email && password;
   return (
-    <Section title="Login form">
-      <form className={s.form} onSubmit={handleSubmit}>
-        <FormTextField
-          value={email}
-          onChange={handleChange}
-          {...fields.email}
-        />
-        <FormTextField
-          value={password}
-          onChange={handleChange}
-          {...fields.password}
-        />
-        <button type="submit" disabled={!isActive} className={s.btn}>
-          Submit
-        </button>
-      </form>
-    </Section>
+    <Formik
+      initialValues={{
+        email: '',
+        password: '',
+      }}
+      validationSchema={Yup.object().shape({
+        email: Yup.string().email('Invalid address').required('Required'),
+        password: Yup.string()
+          .matches(
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/,
+            'Must numbers, english small and large letters'
+          )
+          .min(8, 'Email must be 8 characters or more')
+          .required('Required'),
+        // .typeError('you must specify a number')
+      })}
+      // values это наш state in formik
+      onSubmit={(values, props) => {
+        const { resetForm } = props;
+        onSubmitClick({ ...values });
+        resetForm();
+      }}
+    >
+      {props => {
+        const { values, handleChange, handleSubmit, errors } = props;
+        const { email, password } = values;
+        const isActive = !email || !password || errors.email || errors.password;
+        return (
+          <Section title="Login form">
+            <Form className={s.form} onSubmit={handleSubmit}>
+              <div className={s.block}>
+                <Field
+                  name="email"
+                  type="email"
+                  value={values.email}
+                  className={s.input}
+                  onChange={handleChange}
+                />
+                <label htmlFor="email" className={s.label}>
+                  Email
+                </label>
+                <ErrorMessage name="email" className={s.error}>
+                  {msg => <div className={s.error}>{msg}</div>}
+                </ErrorMessage>
+              </div>
+
+              <div className={s.block}>
+                <Field
+                  name="password"
+                  type="password"
+                  value={values.password}
+                  className={s.input}
+                  onChange={handleChange}
+                />
+                <label htmlFor="password" className={s.label}>
+                  Password
+                </label>
+                <ErrorMessage name="password" className={s.error}>
+                  {msg => <div className={s.error}>{msg}</div>}
+                </ErrorMessage>
+              </div>
+
+              <button type="submit" className={s.btn} disabled={isActive}>
+                Submit
+              </button>
+            </Form>
+          </Section>
+        );
+      }}
+    </Formik>
   );
 };
 

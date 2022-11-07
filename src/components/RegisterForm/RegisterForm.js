@@ -1,43 +1,100 @@
 import PropTypes from 'prop-types';
 import s from './RegisterForm.module.css';
-import useForm from '../../services/hooks/useForm';
-import FormTextField from 'components/FormTextField/FormTextField';
 import Section from 'components/Section/Section';
-import { fields } from './fields';
-
-const initialState = {
-  name: '',
-  email: '',
-  password: '',
-};
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const RegisterForm = ({ onSubmitClick }) => {
-  const { state, handleChange, handleSubmit } = useForm({
-    onSubmitClick,
-    initialState,
-  });
-
-  const { name, email, password } = state;
-  const isActive = name && email && password.length > 6;
   return (
-    <Section title="Registration form">
-      <form className={s.form} onSubmit={handleSubmit}>
-        <FormTextField value={name} onChange={handleChange} {...fields.name} />
-        <FormTextField
-          value={email}
-          onChange={handleChange}
-          {...fields.email}
-        />
-        <FormTextField
-          value={password}
-          onChange={handleChange}
-          {...fields.password}
-        />
-        <button type="submit" disabled={!isActive} className={s.btn}>
-          Submit
-        </button>
-      </form>
-    </Section>
+    <Formik
+      initialValues={{
+        name: '',
+        email: '',
+        password: '',
+      }}
+      validationSchema={Yup.object().shape({
+        name: Yup.string()
+          .matches(/^[a-zA-Z]+$/, 'Must be only charaters')
+          .min(2, 'Must be 2 characters or more')
+          .required('Required'),
+        email: Yup.string().email('Invalid address').required('Required'),
+        password: Yup.string()
+          .matches(
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/,
+            'Must numbers, english small and large letters'
+          )
+          .min(8, 'Email must be 8 characters or more')
+          .required('Required'),
+      })}
+      onSubmit={(values, props) => {
+        const { resetForm } = props;
+        onSubmitClick({ ...values });
+        resetForm();
+      }}
+    >
+      {props => {
+        const { values, handleChange, handleSubmit, errors } = props;
+        const { name, email, password } = values;
+        const isActive =
+          !name || !email || !password || errors.email || errors.password;
+        return (
+          <Section title="Register form">
+            <Form className={s.form} onSubmit={handleSubmit}>
+              <div className={s.block}>
+                <Field
+                  name="name"
+                  type="name"
+                  value={values.name}
+                  className={s.input}
+                  onChange={handleChange}
+                />
+                <label htmlFor="name" className={s.label}>
+                  Name
+                </label>
+                <ErrorMessage name="name" className={s.error}>
+                  {msg => <div className={s.error}>{msg}</div>}
+                </ErrorMessage>
+              </div>
+              <div className={s.block}>
+                <Field
+                  name="email"
+                  type="email"
+                  value={values.email}
+                  className={s.input}
+                  onChange={handleChange}
+                />
+                <label htmlFor="email" className={s.label}>
+                  Email
+                </label>
+                <ErrorMessage name="email" className={s.error}>
+                  {msg => <div className={s.error}>{msg}</div>}
+                </ErrorMessage>
+              </div>
+
+              <div className={s.block}>
+                <Field
+                  name="password"
+                  type="password"
+                  value={values.password}
+                  className={s.input}
+                  onChange={handleChange}
+                />
+                <label htmlFor="password" className={s.label}>
+                  Password
+                </label>
+                <ErrorMessage name="password" className={s.error}>
+                  {msg => <div className={s.error}>{msg}</div>}
+                </ErrorMessage>
+              </div>
+
+              <button type="submit" className={s.btn} disabled={isActive}>
+                Submit
+              </button>
+            </Form>
+          </Section>
+        );
+      }}
+    </Formik>
   );
 };
 

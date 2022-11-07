@@ -33,7 +33,8 @@ class AuthStore {
     try {
       this.setError(null);
       this.setLoading(true);
-      const result = await api.login(data);
+      const result = await api.register(data);
+      localStorage.setItem('token', JSON.stringify(result.token));
       this.setUser(result.user);
       this.setToken(result.token);
       this.setIsLogin(true);
@@ -50,7 +51,6 @@ class AuthStore {
       this.setError(null);
       this.setLoading(true);
       const result = await api.login(data);
-      // localStorage.setItem('user', JSON.stringify(result.user));
       localStorage.setItem('token', JSON.stringify(result.token));
       this.setUser(result.user);
       this.setToken(result.token);
@@ -67,6 +67,7 @@ class AuthStore {
       this.setError(null);
       this.setLoading(true);
       await api.logout(data);
+      localStorage.clear();
       this.setUser({});
       this.setToken('');
       this.setIsLogin(false);
@@ -77,10 +78,8 @@ class AuthStore {
       this.setLoading(false);
     }
   };
-  getCurrentUser = async () => {
+  getCurrentUser = async token => {
     try {
-      const token = JSON.parse(localStorage.getItem('token'));
-      console.log('token getCurrentUser: ', token);
       this.setError(null);
       this.setLoading(true);
       const result = await api.getCurrentUser(token);

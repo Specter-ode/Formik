@@ -8,20 +8,33 @@ import Spinner from './Spinner/Spinner';
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
-import { authStore } from 'mobx/store';
+import { authStore, contactsStore } from 'mobx/store';
+import { observer } from 'mobx-react-lite';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
-const MobxPage = lazy(() => import('../pages/MobxPage/MobxPage'));
 const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 
 const App = () => {
+  const { token, isLogin } = authStore;
   useEffect(() => {
-    authStore.getCurrentUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const tokenFromStorage = JSON.parse(localStorage.getItem('token'));
+    if (tokenFromStorage) {
+      authStore.setToken(tokenFromStorage);
+    }
   }, []);
+
+  useEffect(() => {
+    if (!isLogin && token) {
+      authStore.getCurrentUser(token);
+    }
+    if (isLogin && token) {
+      console.log('fetchContacts: ');
+      contactsStore.fetchContacts();
+    }
+  }, [isLogin, token]);
 
   return (
     <Container>
@@ -30,7 +43,6 @@ const App = () => {
       <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/mobx" element={<MobxPage />} />
           <Route element={<PrivateRoute />}>
             <Route path="/contacts" element={<ContactsPage />} />
           </Route>
@@ -54,4 +66,4 @@ const App = () => {
     </Container>
   );
 };
-export default App;
+export default observer(App);

@@ -25,11 +25,9 @@ class ContactsStore {
   };
   get visibleContacts() {
     const normalizedFilterValue = this.filter.toLowerCase().trim();
-    console.log('normalizedFilterValue: ', normalizedFilterValue);
     const visibleContacts = this.items.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilterValue)
     );
-    console.log('visibleContacts: ', visibleContacts);
     return visibleContacts;
   }
   onChangeFilter = e => {
@@ -40,7 +38,6 @@ class ContactsStore {
       this.setError(null);
       this.setLoading(true);
       const result = await api.getContacts();
-      console.log('result: ', result);
       this.items = result;
     } catch (error) {
       toast.error(`Sorry, request failed. We can't load your contacts.`);
@@ -58,7 +55,7 @@ class ContactsStore {
       toast.error(`${data.name} is already in contacts`, {
         theme: 'colored',
       });
-      return
+      return;
     }
     try {
       this.setError(null);

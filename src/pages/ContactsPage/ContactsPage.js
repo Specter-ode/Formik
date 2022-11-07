@@ -1,5 +1,4 @@
 import s from './ContactsPage.module.css';
-import { useEffect } from 'react';
 import Section from '../../components/Section/Section';
 import ContactForm from '../../components/ContactForm/ContactForm';
 import ContactList from '../../components/ContactList/ContactList';
@@ -10,7 +9,6 @@ import { observer } from 'mobx-react-lite';
 
 const ContactsPage = observer(() => {
   const {
-    fetchContacts,
     addContact,
     removeContact,
     onChangeFilter,
@@ -20,13 +18,6 @@ const ContactsPage = observer(() => {
     filter,
     visibleContacts,
   } = contactsStore;
-
-  useEffect(() => {
-    fetchContacts();
-    console.log('запрос фетч контактс');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <main>
       <div className={s.container}>
