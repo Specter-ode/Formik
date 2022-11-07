@@ -4,7 +4,6 @@ import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { observer } from 'mobx-react-lite';
 
 const RegisterPage = observer(() => {
-  console.log(contactsStore.loading);
   return (
     <main>
       <div className={s.container}>
