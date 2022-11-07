@@ -1,5 +1,5 @@
 import s from './RegisterPage.module.css';
-import { authStore, contactsStore } from 'mobx/store';
+import { authStore } from 'mobx/store';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import { observer } from 'mobx-react-lite';
 
