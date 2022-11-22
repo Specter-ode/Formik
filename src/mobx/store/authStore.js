@@ -29,17 +29,17 @@ class AuthStore {
   setLoading = bool => {
     this.loading = bool;
   };
-  register = async data => {
+  registration = async data => {
     try {
       this.setError(null);
       this.setLoading(true);
-      const result = await api.register(data);
+      const result = await api.registration(data);
       localStorage.setItem('token', JSON.stringify(result.token));
       this.setUser(result.user);
       this.setToken(result.token);
       this.setIsLogin(true);
     } catch (error) {
-      toast.error(`Sorry, Register failed. Try again.`);
+      toast.error(`Sorry, Registration failed. Try again.`);
       this.setError(error);
     } finally {
       this.setLoading(false);

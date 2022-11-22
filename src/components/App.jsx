@@ -14,7 +14,9 @@ import { observer } from 'mobx-react-lite';
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
+const RegistrationPage = lazy(() =>
+  import('../pages/RegistrationPage/RegistrationPage')
+);
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 
 const App = () => {
@@ -48,7 +50,7 @@ const App = () => {
           </Route>
 
           <Route element={<PublicRoute />}>
-            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Route>
 

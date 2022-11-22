@@ -1,20 +1,20 @@
-import s from './RegisterPage.module.css';
+import s from './RegistrationPage.module.css';
 import { authStore } from 'mobx/store';
-import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import { observer } from 'mobx-react-lite';
 
-const RegisterPage = observer(() => {
+const RegistrationPage = observer(() => {
   return (
     <main>
       <div className={s.container}>
         <h3>
           You are on the right way. To access to the phonebook you need to
-          register
+          registration
         </h3>
-        <RegisterForm onSubmitClick={authStore.register} />
+        <RegistrationForm onSubmitClick={authStore.registration} />
       </div>
     </main>
   );
 });
 
-export default RegisterPage;
+export default RegistrationPage;

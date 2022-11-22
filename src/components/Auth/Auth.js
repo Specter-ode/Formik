@@ -9,8 +9,8 @@ const getLinkClassName = props => {
 const AuthNav = () => {
   return (
     <div>
-      <NavLink to="/register" className={getLinkClassName}>
-        Register
+      <NavLink to="/registration" className={getLinkClassName}>
+        Registration
       </NavLink>
       <NavLink to="/login" className={getLinkClassName}>
         Sign in

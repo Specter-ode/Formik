@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import s from './RegisterForm.module.css';
+import s from './RegistrationForm.module.css';
 import Section from 'components/Section/Section';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-const RegisterForm = ({ onSubmitClick }) => {
+const RegistrationForm = ({ onSubmitClick }) => {
   return (
     <Formik
       initialValues={{
@@ -38,7 +38,7 @@ const RegisterForm = ({ onSubmitClick }) => {
         const isActive =
           !name || !email || !password || errors.email || errors.password;
         return (
-          <Section title="Register form">
+          <Section title="Registration form">
             <Form className={s.form} onSubmit={handleSubmit}>
               <div className={s.block}>
                 <Field
@@ -98,7 +98,7 @@ const RegisterForm = ({ onSubmitClick }) => {
   );
 };
 
-RegisterForm.propTypes = {
+RegistrationForm.propTypes = {
   onSubmitClick: PropTypes.func.isRequired,
 };
-export default RegisterForm;
+export default RegistrationForm;
