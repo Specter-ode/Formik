@@ -1,8 +1,8 @@
 {
-  "name": "Formik",
+  "name": "phonebook-mobx-formik",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://specter-ode.github.io/Formik/",
+  "homepage": "https://specter-ode.github.io/Phonebook-Mobx-Formik/",
   "dependencies": {
     "@mobx-devtools/tools": "^0.0.4",
     "@reduxjs/toolkit": "^1.8.5",
