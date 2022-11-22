@@ -14,7 +14,7 @@ setTimeout(() =>
 );
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/Phonebook-Mobx-Formik/">
+    <BrowserRouter basename="/Phonebook">
       <App />
     </BrowserRouter>
   </React.StrictMode>
